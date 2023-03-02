@@ -1,7 +1,8 @@
 const { UserModel } = require("../model/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const dotenv = require("dotenv");
+dotenv.config();
 
 const getAllusers = async (req, res) => {
   const userID = req.body.userID;
@@ -10,7 +11,7 @@ const getAllusers = async (req, res) => {
   try {
     const user = await UserModel.findById(userID);
 
-    if (user && user.role==="admin") {
+    if (user && user.role === "admin") {
       const query = { role: "user" };
 
       if (text_query) {
@@ -46,7 +47,6 @@ const getAllusers = async (req, res) => {
     res.status(400).send({ msg: "Something went wrong" });
   }
 };
-
 
 const registerUser = async (req, res) => {
   try {
@@ -102,7 +102,11 @@ const userLogin = async (req, res) => {
           // console.log("login l-101", userExists.isActive);
           userExists.isActive = true;
           await userExists.save();
-          res.status(200).send({ msg: "Login Successfull", token: token ,name:userExists.name});
+          res.status(200).send({
+            msg: "Login Successfull",
+            token: token,
+            name: userExists.name,
+          });
         } else {
           res.status(401).send("Wrong Credntials");
         }
@@ -118,7 +122,6 @@ const userLogin = async (req, res) => {
 const userLogout = async (req, res) => {
   try {
     const user = await UserModel.findById(req.body.userID);
-    console.log(user);
     if (!user) {
       return res.status(404).send("User not found");
     }
@@ -138,14 +141,25 @@ const usergetProfile = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    res.status(200).send({ message: "Your Address",address:user.address });
+    const useDetails = {
+      id: userID,
+      image: user.image,
+      name: user.name,
+      email: user.email,
+      mobile: user.mobile,
+      address: user.address,
+    };
+    res.status(200).json({
+      message: "Your Profile",
+      profile: useDetails,
+    });
   } catch (err) {
     return res.json({ message: "Something went wrong updating profile" });
   }
 };
 
 const userUpdateProfile = async (req, res) => {
-  const { name, mobile, city, area,  state, pinCode, addressId } =req.body;
+  const { name, mobile, city, area, state, pinCode, addressId } = req.body;
   try {
     // Find the user by ID
     const user = await UserModel.findById(req.body.userID);
@@ -249,13 +263,14 @@ const userDeleteAddress = async (req, res) => {
 const ChangePassword = async (req, res) => {
   const { email, oldPassword, newPassword } = req.body;
 
-  if( ! email || ! oldPassword){
-    return res.status(400).send({msg:"email and current password required"})
+  if (!email || !oldPassword) {
+    return res.status(400).send({ msg: "email and current password required" });
   }
 
-  if(!newPassword || newPassword.trim().length<6)
-  {
-    return res.status(400).send({msg:"New password missing or length less 6"})
+  if (!newPassword || newPassword.trim().length < 6) {
+    return res
+      .status(400)
+      .send({ msg: "New password missing or length less 6" });
   }
   try {
     const user = await UserModel.findOne({ email });
@@ -276,7 +291,7 @@ const ChangePassword = async (req, res) => {
 
     res.status(200).send("Password updated successfully");
   } catch (error) {
-    res.status(400).send({  error: error.message });
+    res.status(400).send({ error: error.message });
   }
 };
 
@@ -299,8 +314,6 @@ const forgetPassword = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   getAllusers,
   registerUser,
@@ -310,5 +323,5 @@ module.exports = {
   userUpdateProfile,
   userDeleteAddress,
   ChangePassword,
-  forgetPassword
+  forgetPassword,
 };

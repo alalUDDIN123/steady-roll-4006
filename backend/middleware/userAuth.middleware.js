@@ -1,4 +1,6 @@
 const jwt = require("jsonwebtoken");
+const dotenv=require("dotenv");
+dotenv.config();
 
 
 const authenticateToken = (req, res, next) => {
@@ -11,6 +13,7 @@ const authenticateToken = (req, res, next) => {
       const userID = decoded.ExistingUserID;
       // console.log("after decoding the token", userID);
       req.body.userID = userID;
+      // console.log("b-l-15",userID);
       next();
     } else {
       res.send("Please Login");

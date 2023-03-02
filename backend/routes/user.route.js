@@ -21,15 +21,15 @@ const {
 
 const userRoutes = express.Router();
 
-userRoutes.get("/", authenticateToken, adminAccesssOnly, getAllusers);
-userRoutes.post("/register", userSignupInputValidate, registerUser);
-userRoutes.post("/login", userLoginInput, userLogin);
-userRoutes.post("/logout", authenticateToken, userLogout)
-userRoutes.get("/address", authenticateToken, usergetProfile)
-userRoutes.patch("/profile", authenticateToken,  userUpdateProfile)
+userRoutes.get("/", authenticateToken, adminAccesssOnly, getAllusers); //ok
+userRoutes.post("/register", userSignupInputValidate, registerUser); //ok
+userRoutes.post("/login", userLoginInput, userLogin); //ok
+userRoutes.post("/logout", authenticateToken, userLogout) //ok
+userRoutes.get("/profile", authenticateToken, usergetProfile) //ok
+userRoutes.patch("/profile/update", authenticateToken,  userUpdateProfile) 
 userRoutes.delete("/delete/address", authenticateToken,userDeleteAddress);
 userRoutes.patch("/password/change", authenticateToken, ChangePassword)
-userRoutes.patch("/forgetPassword",  forgetPassword)
+userRoutes.patch("/password/forget",  forgetPassword)
 
 
 module.exports = {
