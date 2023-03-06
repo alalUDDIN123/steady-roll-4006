@@ -20,6 +20,9 @@
 5. LocalStorage
 6. CharaUI
 7. Redux
+8. Mongoose 
+9. Jsonwebtoken 
+10. bcrypt 
 ## Description
 
 
