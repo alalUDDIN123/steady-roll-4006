@@ -10,64 +10,118 @@ import styles from "./home.module.css";
 import { useEffect, useState } from "react";
 import { allOrders, allProducts, alluser } from "../fetchData/data";
 
-export const data = [
-  ["Field", "Amount", { role: "style" }],
-  ["Products", 100, "#ffa41c"], // RGB value
-  ["Users", 10, "silver"], // English color name
-  ["Orders", 3, "gold"],
-  // CSS-style declaration
-];
+// export const data = [
+//   ["Field", "Amount", { role: "style" }],
+//   ["Products", 100, "#ffa41c"], // RGB value
+//   ["Users", 10, "silver"], // English color name
+//   ["Orders", 3, "gold"],
+//   // CSS-style declaration
+// ];
 
-export const data1 = [
-  ["Day", "Products", "Orders", "users"],
-  [1, 37.8, 80.8, 41.8],
-  [2, 30.9, 69.5, 32.4],
-  [3, 25.4, 57, 25.7],
-  [4, 11.7, 18.8, 10.5],
-  [5, 11.9, 17.6, 10.4],
-  [6, 8.8, 13.6, 7.7],
-  [7, 7.6, 12.3, 9.6],
-  [8, 12.3, 29.2, 10.6],
-  [9, 16.9, 42.9, 14.8],
-  [10, 12.8, 30.9, 11.6],
-  [11, 5.3, 7.9, 4.7],
-  [12, 6.6, 8.4, 5.2],
-  [13, 4.8, 6.3, 3.6],
-  [14, 4.2, 6.2, 3.4],
-];
+// export const data1 = [
+//   ["Day", "Products", "Orders", "users"],
+//   [1, 37.8, 80.8, 41.8],
+//   [2, 30.9, 69.5, 32.4],
+//   [3, 25.4, 57, 25.7],
+//   [4, 11.7, 18.8, 10.5],
+//   [5, 11.9, 17.6, 10.4],
+//   [6, 8.8, 13.6, 7.7],
+//   [7, 7.6, 12.3, 9.6],
+//   [8, 12.3, 29.2, 10.6],
+//   [9, 16.9, 42.9, 14.8],
+//   [10, 12.8, 30.9, 11.6],
+//   [11, 5.3, 7.9, 4.7],
+//   [12, 6.6, 8.4, 5.2],
+//   [13, 4.8, 6.3, 3.6],
+//   [14, 4.2, 6.2, 3.4],
+// ];
 
-export const options = {
-  chart: {
-    title: "Website figures in First Two Weeks of February",
-    subtitle: "in numbers",
-  },
-};
-export const data2 = [
-  ["Field", "Numbers"],
-  ["Products", 100],
-  ["orders", 20],
-];
-export const data3 = [
-  ["Field", "Numbers"],
-  ["Products", 100],
-  ["users", 50],
-];
-export const options2 = {
-  title: "Website Inventories",
-  legend: "none",
-  pieSliceText: "label",
-  slices: {
-    4: { offset: 0.2 },
-    12: { offset: 0.3 },
-    14: { offset: 0.4 },
-    15: { offset: 0.5 },
-  },
-};
+// export const options = {
+//   chart: {
+//     title: "Website figures in First Two Weeks of February",
+//     subtitle: "in numbers",
+//   },
+// };
+// export const data2 = [
+//   ["Field", "Numbers"],
+//   ["Products", 100],
+//   ["orders", 20],
+// ];
+// export const data3 = [
+//   ["Field", "Numbers"],
+//   ["Products", 100],
+//   ["users", 50],
+// ];
+// export const options2 = {
+//   title: "Website Inventories",
+//   legend: "none",
+//   pieSliceText: "label",
+//   slices: {
+//     4: { offset: 0.2 },
+//     12: { offset: 0.3 },
+//     14: { offset: 0.4 },
+//     15: { offset: 0.5 },
+//   },
+// };
 const Home = () => {
   const [Allusers, setAllusers] = useState([]);
   const [allproducts, setAllProducts] = useState(0);
   const [allOrder, setAllOrder] = useState([]);
 
+  const data = [
+    ["Field", "Amount", { role: "style" }],
+    ["Products", 100, "#ffa41c"], // RGB value
+    ["Users", 10, "silver"], // English color name
+    ["Orders", 3, "gold"],
+    // CSS-style declaration
+  ];
+
+  const data1 = [
+    ["Day", "Products", "Orders", "users"],
+    [1, 37.8, 80.8, 41.8],
+    [2, 30.9, 69.5, 32.4],
+    [3, 25.4, 57, 25.7],
+    [4, 11.7, 18.8, 10.5],
+    [5, 11.9, 17.6, 10.4],
+    [6, 8.8, 13.6, 7.7],
+    [7, 7.6, 12.3, 9.6],
+    [8, 12.3, 29.2, 10.6],
+    [9, 16.9, 42.9, 14.8],
+    [10, 12.8, 30.9, 11.6],
+    [11, 5.3, 7.9, 4.7],
+    [12, 6.6, 8.4, 5.2],
+    [13, 4.8, 6.3, 3.6],
+    [14, 4.2, 6.2, 3.4],
+  ];
+  const data2 = [
+    ["Field", "Numbers"],
+    ["Products", 100],
+    ["orders", 20],
+  ];
+
+  const data3 = [
+    ["Field", "Numbers"],
+    ["Products", 100],
+    ["users", 50],
+  ];
+
+  const options = {
+    chart: {
+      title: "Website figures in First Two Weeks of February",
+      subtitle: "in numbers",
+    },
+  };
+  const options2 = {
+    title: "Website Inventories",
+    legend: "none",
+    pieSliceText: "label",
+    slices: {
+      4: { offset: 0.2 },
+      12: { offset: 0.3 },
+      14: { offset: 0.4 },
+      15: { offset: 0.5 },
+    },
+  };
 
   useEffect(() => {
     alluser().then((res) => {
@@ -82,7 +136,6 @@ const Home = () => {
       setAllOrder(res.data.orders);
     });
   }, []);
-  
 
   return (
     <div>
